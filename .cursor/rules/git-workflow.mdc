@@ -1,0 +1,50 @@
+---
+description: Git workflow, branch naming, commit conventions, and PR templates for TeleMed
+alwaysApply: true
+---
+
+# Git Workflow
+
+## Branch Strategy
+
+- `main` - Production-ready code, protected
+- `develop` - Integration branch for features
+- `feature/*` - New features (e.g., `feature/video-call-room`)
+- `fix/*` - Bug fixes (e.g., `fix/stripe-webhook-timeout`)
+- `chore/*` - Tooling, deps, config (e.g., `chore/upgrade-turbo`)
+
+## Commit Conventions
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+feat(api): add consultation booking endpoint
+fix(mobile): resolve date picker timezone issue
+chore(deps): upgrade Stripe SDK to v17
+docs(readme): update setup instructions
+refactor(shared): extract user types to separate file
+test(api): add webhook handler tests
+```
+
+## Pull Requests
+
+- PRs require at least one review before merging
+- Keep PRs focused and small (< 500 lines when possible)
+- Include testing instructions and screenshots for UI changes
+- Link related issues in the description
+
+## Before Committing
+
+1. Run `pnpm lint` to check code quality
+2. Run `pnpm typecheck` to verify TypeScript
+3. Run relevant tests: `pnpm test`
+4. Ensure no `.env` files are staged
+5. Use `git add -p` for granular staging
+
+## Never Commit
+
+- `.env` files or any files containing secrets
+- `node_modules/` (gitignored)
+- Build outputs: `.next/`, `dist/`, `.expo/`
+- `.turbo/` cache
+- IDE-specific settings (except shared `.vscode/settings.json`)

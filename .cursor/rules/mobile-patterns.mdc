@@ -1,0 +1,43 @@
+---
+description: Expo Router patterns, component structure, state management, and React Native best practices
+globs: apps/mobile/src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Mobile App Patterns
+
+## Expo Router
+
+- File-based routing under `apps/mobile/src/app/`
+- Use route groups: `(auth)/` for auth flow, `(tabs)/` for main app
+- Dynamic routes: `[id].tsx`, `[professionalId].tsx`
+- Layout files: `_layout.tsx` for shared layouts (ClerkProvider, TabBar)
+
+## Component Structure
+
+- Screens are top-level, route files are thin (delegate to features)
+- Reusable components in `src/components/`
+- Feature modules in `src/features/` (auth, booking, video, etc.)
+- Each screen handles its own data fetching via hooks/stores
+
+## State Management
+
+- **Zustand** for global state (`src/stores/`)
+  - `auth.ts` - User profile and auth state
+  - `app-data.ts` - Consultations, prescriptions lists
+- **React state** for local UI state
+- **Zod** for form validation (shared with backend)
+
+## Styling
+
+- Theme tokens in `src/theme/index.ts` - never hardcode colors or sizes
+- Use `StyleSheet.create()` for performance
+- Design system: primary (cyan), secondary (green), neutral (gray)
+- Consistent spacing scale: xs(4), sm(8), md(16), lg(24), xl(32)
+
+## API Calls
+
+- Centralized in `src/services/api.ts` with typed helpers
+- Loading states: use `useLoadingState` hook or store loading flags
+- Error handling: catch errors and show user-friendly messages
+- Never make API calls directly in render - use `useEffect` or event handlers

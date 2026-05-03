@@ -1,0 +1,63 @@
+{
+  "expo": {
+    "name": "TeleMed",
+    "slug": "telemed",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "telemed",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0891B2"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.telemed.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "A TeleMed precisa acessar sua câmera para as teleconsultas.",
+        "NSMicrophoneUsageDescription": "A TeleMed precisa acessar seu microfone para as teleconsultas."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0891B2"
+      },
+      "package": "app.telemed.mobile",
+      "permissions": ["CAMERA", "RECORD_AUDIO", "INTERNET"]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "A TeleMed precisa acessar suas fotos para o perfil e documentos.",
+          "cameraPermission": "A TeleMed precisa acessar sua câmera para as teleconsultas."
+        }
+      ],
+      "@sentry/react-native/expo"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "clerkPublishableKey": "$EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY",
+      "supabaseUrl": "$EXPO_PUBLIC_SUPABASE_URL",
+      "supabaseAnonKey": "$EXPO_PUBLIC_SUPABASE_ANON_KEY",
+      "dailyApiKey": "$EXPO_PUBLIC_DAILY_API_KEY",
+      "stripePublishableKey": "$EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+      "eas": {
+        "projectId": "your-project-id"
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+---
+description: Testing standards and patterns for TeleMed platform
+alwaysApply: false
+---
+
+# Testing Standards
+
+## Testing Philosophy
+
+- **Critical paths first**: Auth flow, payment processing, booking system
+- **API routes**: Integration tests with Supertest or direct fetch
+- **Mobile screens**: Component tests with React Native Testing Library
+- **Database**: Test RLS policies with Supabase local development
+
+## Test Structure
+
+```
+apps/api/__tests__/      # API tests
+  api/
+    consultations.test.ts
+    payments.test.ts
+  lib/
+    stripe.test.ts
+
+apps/mobile/__tests__/   # Mobile tests
+  screens/
+    HomeScreen.test.tsx
+    BookingScreen.test.tsx
+  components/
+    ProfessionalCard.test.tsx
+```
+
+## API Testing Patterns
+
+- Mock external services (Stripe, Daily.co, Resend) in tests
+- Test validation (invalid input returns 400)
+- Test authentication (unauthenticated returns 401)
+- Test authorization (wrong user returns 403)
+- Test webhook handling with signed payloads
+
+## Mobile Testing Patterns
+
+- Test screens render correctly with mock data
+- Test navigation flows
+- Test form validation and error states
+- Test loading states
+- Use `jest` with `@testing-library/react-native`
+
+## Running Tests
+
+```bash
+pnpm test          # Run all tests
+pnpm test:api      # API tests only
+pnpm test:mobile   # Mobile tests only
+```

@@ -1,0 +1,27 @@
+{
+  "name": "telemed",
+  "private": true,
+  "version": "0.1.0",
+  "description": "TeleMed - Telemedicine Subscription Platform",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "clean": "turbo clean",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@telemed/eslint-config": "workspace:*",
+    "@telemed/ts-config": "workspace:*",
+    "prettier": "^3.4.2",
+    "turbo": "^2.5.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "packageManager": "pnpm@10.33.2"
+}

@@ -1,0 +1,46 @@
+---
+description: Monorepo conventions, file naming, import paths, and project structure patterns for TeleMed
+alwaysApply: true
+---
+
+# TeleMed Project Structure
+
+## Monorepo Layout
+
+TeleMed uses a **Turborepo monorepo** with pnpm workspaces:
+
+```
+apps/       - Application code (mobile, api)
+packages/   - Shared libraries (shared, ts-config, eslint-config)
+tooling/    - Build and dev tooling
+supabase/   - Database migrations
+.cursor/    - AI rules and subagents
+```
+
+## Package Naming
+
+- All packages use the `@telemed/` scope
+- App packages: `@telemed/mobile`, `@telemed/api`
+- Shared packages: `@telemed/shared`, `@telemed/ts-config`, `@telemed/eslint-config`
+
+## Import Conventions
+
+- Use path aliases configured in tsconfig: `@/` maps to `src/`
+- Cross-package imports use `@telemed/shared` (workspace dependency)
+- Never use relative imports across package boundaries beyond one level
+- Prefer barrel exports (index.ts) in shared packages
+
+## File Naming
+
+- Components: PascalCase (`SignInScreen.tsx`, `ProfessionalCard.tsx`)
+- Utilities: kebab-case or camelCase (`api-utils.ts`, `tokenCache.ts`)
+- Types: camelCase matching domain (`database.ts`, `api.ts`)
+- Route files: Expo Router conventions (`[id].tsx`, `_layout.tsx`, `index.tsx`)
+
+## Adding New Packages
+
+Run from the monorepo root:
+```bash
+pnpm turbo gen workspace
+```
+Or manually create the package and add to `pnpm-workspace.yaml`.

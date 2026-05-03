@@ -1,0 +1,36 @@
+---
+description: Supabase database conventions, RLS policies, migration patterns, and query best practices
+globs: supabase/**/*.sql, apps/*/src/**/*.ts
+alwaysApply: false
+---
+
+# Database Conventions
+
+## Migrations
+
+- All migrations live in `supabase/migrations/`
+- Name format: `NNN_descriptive_name.sql` (e.g., `001_initial_schema.sql`)
+- Never edit existing migrations; always create new ones
+- Run migrations locally before deploying: `supabase db push`
+
+## Row Level Security (RLS)
+
+- **Always enable RLS** on tables containing user data
+- Policies for public read on reference tables (professionals, availability)
+- Policies for user-scoped read/write (consultations, prescriptions, payments)
+- Service role bypass for server-side operations via `SUPABASE_SERVICE_ROLE_KEY`
+
+## Supabase Client Usage
+
+- Backend uses `supabaseAdmin` (service role) in `apps/api/src/lib/supabase/client.ts`
+- Client-side Supabase is initialized with `EXPO_PUBLIC_SUPABASE_*` env vars
+- Always use prepared statements/parameterized queries (Supabase JS client handles this)
+- Use `.select()` with explicit column lists, never `SELECT *`
+
+## Schema Design
+
+- UUID primary keys (`gen_random_uuid()`)
+- Timestamps with timezone (`TIMESTAMPTZ`) 
+- Enums via CHECK constraints, not Postgres ENUM types
+- Foreign keys with appropriate ON DELETE actions
+- Composite indexes for common query patterns (e.g., `(patient_id, status)`)

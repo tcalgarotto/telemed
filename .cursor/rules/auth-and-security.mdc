@@ -1,0 +1,42 @@
+---
+description: Clerk integration patterns, auth middleware, PII handling, and security best practices for the TeleMed platform
+alwaysApply: true
+---
+
+# Auth & Security
+
+## Clerk Integration
+
+- **Mobile**: Use `@clerk/clerk-expo` with token cache via `expo-secure-store`
+- **Backend**: Use `@clerk/nextjs` middleware for route protection
+- All API routes (except webhooks and health) require authentication
+- User sync: Clerk webhook (`user.created`, `user.updated`, `user.deleted`) syncs to Supabase users table
+- Webhook verification: Always verify Svix headers before processing
+
+## PII & Medical Data
+
+- **Never log** patient health information (PHI) - filter before sending to Sentry
+- Prescriptions, consultation notes, and medical data are sensitive
+- RLS policies ensure users can only access their own data
+- File uploads (documents, prescriptions) use private Supabase buckets
+- Delete sensitive data on user deletion (CASCADE in database)
+
+## Security Headers
+
+- API CORS is restricted to the mobile app origin
+- Clerk handles JWT-based session management
+- Server-side operations use service role key (never expose to client)
+
+## Environment Variables
+
+- Never commit `.env` files
+- Use `.env.example` as documentation
+- Prefixes: `NEXT_PUBLIC_` for Next.js client, `EXPO_PUBLIC_` for Expo
+- Secrets: `SUPABASE_SERVICE_ROLE_KEY`, `STRIPE_SECRET_KEY`, `CLERK_SECRET_KEY`, `DAILY_API_KEY`, `RESEND_API_KEY`
+
+## Input Validation
+
+- Always validate on both client AND server
+- Use shared Zod schemas from `@telemed/shared`
+- Sanitize user input before storing
+- Rate limiting on auth and payment endpoints

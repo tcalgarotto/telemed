@@ -1,0 +1,11 @@
+{
+  "name": "@telemed/ts-config",
+  "version": "0.1.0",
+  "private": true,
+  "files": ["base.json", "nextjs.json", "expo.json"],
+  "exports": {
+    "./base": "./base.json",
+    "./nextjs": "./nextjs.json",
+    "./expo": "./expo.json"
+  }
+}

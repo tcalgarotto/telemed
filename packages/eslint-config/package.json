@@ -1,0 +1,19 @@
+{
+  "name": "@telemed/eslint-config",
+  "version": "0.1.0",
+  "private": true,
+  "files": ["./base.js", "./nextjs.js", "./expo.js"],
+  "exports": {
+    "./base": "./base.js",
+    "./nextjs": "./nextjs.js",
+    "./expo": "./expo.js"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-hooks": "^5.1.0"
+  }
+}

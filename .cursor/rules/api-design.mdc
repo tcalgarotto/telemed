@@ -1,0 +1,56 @@
+---
+description: API route design patterns, error handling, Zod validation, and response formatting for Next.js API routes
+globs: apps/api/src/app/api/**/*.ts
+alwaysApply: false
+---
+
+# API Design Patterns
+
+## Route Structure
+
+API routes follow Next.js App Router conventions under `apps/api/src/app/api/`:
+
+```
+api/
+├── webhooks/     # Inbound webhooks (Clerk, Stripe) - NO auth required
+├── users/        # User profile management
+├── professionals/ # Professional listing, registration
+├── consultations/ # Booking, history, video join
+├── prescriptions/ # Create, list prescriptions
+├── payments/     # Stripe checkout, subscriptions
+└── health/       # Health check endpoint
+```
+
+## Validation
+
+- **Always validate** request bodies using Zod schemas from `@telemed/shared/validators`
+- Parse and handle validation errors with `handleApiError()` in `lib/api-utils.ts`
+- Validation schemas are centralized in `packages/shared/src/validators/`
+
+## Response Format
+
+All API responses use a consistent wrapper:
+
+```typescript
+// Success
+{ data: T, error: null }
+
+// Error
+{ data: null, error: { code: string, message: string, details?: unknown } }
+```
+
+Use helpers: `apiResponse()`, `apiError()`, `apiPaginatedResponse()`, `handleApiError()`
+
+## Authentication
+
+- All API routes (except webhooks and health) require Clerk authentication
+- Middleware enforces auth at the route level
+- Use `auth()` from `@clerk/nextjs/server` to get the current user
+- Verify ownership for mutations (users can only modify their own data)
+
+## Error Handling
+
+- Catch all errors and return structured responses
+- Never expose internal error details to clients
+- Log errors to console (Sentry captures them automatically)
+- Use specific HTTP status codes (400, 401, 403, 404, 500)

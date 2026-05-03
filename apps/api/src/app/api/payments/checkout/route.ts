@@ -1,9 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
-import { supabaseAdmin } from "@/lib/supabase/client";
-import { createSubscriptionSchema } from "@telemed/shared";
+import { createCheckoutSchema } from "@telemed/shared";
 import { apiResponse, apiError, handleApiError } from "@/lib/api-utils";
 import { createCheckoutSession } from "@/lib/stripe/client";
 
+/** One-time payment checkout (e.g. consultation). */
 export async function POST(request: Request) {
   try {
     const { userId } = await auth();
@@ -11,30 +11,20 @@ export async function POST(request: Request) {
       return apiError("UNAUTHORIZED", "Not authenticated", 401);
     }
 
-    const body = createSubscriptionSchema.parse(await request.json());
-
-    // Get user email
-    const { data: user } = await supabaseAdmin
-      .from("users")
-      .select("email")
-      .eq("id", userId)
-      .single();
-
-    if (!user?.email) {
-      return apiError("NO_EMAIL", "User email required for subscription", 400);
-    }
+    const body = createCheckoutSchema.parse(await request.json());
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3001";
 
     const session = await createCheckoutSession({
-      customerEmail: user.email,
+      customerEmail: "",
       userId,
-      priceId: body.price_id,
-      mode: "subscription",
+      priceId: "",
+      mode: "payment",
       successUrl: `${appUrl}/api/payments/success?session_id={CHECKOUT_SESSION_ID}`,
       cancelUrl: `${appUrl}/api/payments/cancel`,
       metadata: {
-        plan_type: body.plan_type,
+        type: "consultation",
+        consultation_id: body.consultation_id ?? "",
       },
     });
 

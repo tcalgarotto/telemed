@@ -6,8 +6,8 @@ settings:
 
 overrides:
   eslint: 8.57.1
-  '@telemed/mobile>@types/react': 18.3.18
-  '@telemed/mobile>@types/react-dom': 18.3.5
+  '@types/react': 18.3.18
+  '@types/react-dom': 18.3.5
 
 importers:
 
@@ -81,11 +81,11 @@ importers:
         specifier: ^22.10.0
         version: 22.19.17
       '@types/react':
-        specifier: ^19.0.0
-        version: 19.2.14
+        specifier: 18.3.18
+        version: 18.3.18
       '@types/react-dom':
-        specifier: ^19.0.0
-        version: 19.2.3(@types/react@19.2.14)
+        specifier: 18.3.5
+        version: 18.3.5(@types/react@18.3.18)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -2127,7 +2127,7 @@ packages:
     resolution: {integrity: sha512-2neUfZKuqMK2LzfS8NyOWOyWUJOWgDym5fUph6fN9qF+LNPjAvnc4Zr9+o+59qjNu/yXwQgVMWNU4+8WJuPVWw==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@types/react': ^18.2.6
+      '@types/react': 18.3.18
       react: '*'
       react-native: '*'
     peerDependenciesMeta:
@@ -3126,10 +3126,10 @@ packages:
   '@types/prop-types@15.7.15':
     resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
 
-  '@types/react-dom@19.2.3':
-    resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
+  '@types/react-dom@18.3.5':
+    resolution: {integrity: sha512-P4t6saawp+b/dFrUr2cvkVsfvPguwsxtH6dNIYRllMsefqFzkZk5UIjzyDOv5g1dXIPdG4Sp1yCR4Z6RCUsG/Q==}
     peerDependencies:
-      '@types/react': ^19.2.0
+      '@types/react': 18.3.18
 
   '@types/react-native-background-timer@2.0.2':
     resolution: {integrity: sha512-cMAep0M5yqUHjiiRPvGiviqiJYdI45KSjbI5ufsIFSQGFwHwrHJC/8yawNhy0G3Gix6fufWLsEj6jC5niUNHiQ==}
@@ -3140,9 +3140,6 @@ packages:
 
   '@types/react@18.3.18':
     resolution: {integrity: sha512-t4yC+vtgnkYjNSKlFx1jkAhH8LgTo2N/7Qvi83kdEaUtMDiwpbLAktKDaAMlRcJ5eSxZkH74eEGt1ky31d7kfQ==}
-
-  '@types/react@19.2.14':
-    resolution: {integrity: sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==}
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -5861,7 +5858,7 @@ packages:
     resolution: {integrity: sha512-EDg9UFDNmfYXPInpRbxce+4oWFEIGaM7aG6ey4hVllcvMC3PkgCvkiXEB+7EemgC7Qr8CuFjgMTx7P0vvnwZeQ==}
     deprecated: NativeBase has evolved into gluestack-ui! Visit https://gluestack.io to use our next-generation component library.
     peerDependencies:
-      '@types/react': '*'
+      '@types/react': 18.3.18
       '@types/react-native': '*'
       react: '*'
       react-dom: '*'
@@ -6447,7 +6444,7 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
-      '@types/react': ^18.2.6
+      '@types/react': 18.3.18
       react: ^18.2.0
     peerDependenciesMeta:
       '@types/react':
@@ -7472,7 +7469,7 @@ packages:
     resolution: {integrity: sha512-i77ae3aZq4dhMlRhJVCYgMLKuSiZAaUPAct2AksxQ+gOtimhGMdXljRT21P5BNpeT4kXlLIckvkPM029OljD7g==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
-      '@types/react': '>=18.0.0'
+      '@types/react': 18.3.18
       immer: '>=9.0.6'
       react: '>=18.0.0'
       use-sync-external-store: '>=1.2.0'
@@ -7490,7 +7487,7 @@ packages:
     resolution: {integrity: sha512-14fwWQtU3pH4dE0dOpdMiWjddcH+QzKIgk1cl8epwSE7yag43k/AD/m4L6+K7DytAOr9gGBe3/EXj9g7cdostg==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
-      '@types/react': '>=18.0.0'
+      '@types/react': 18.3.18
       immer: '>=9.0.6'
       react: '>=18.0.0'
       use-sync-external-store: '>=1.2.0'
@@ -11349,9 +11346,9 @@ snapshots:
 
   '@types/prop-types@15.7.15': {}
 
-  '@types/react-dom@19.2.3(@types/react@19.2.14)':
+  '@types/react-dom@18.3.5(@types/react@18.3.18)':
     dependencies:
-      '@types/react': 19.2.14
+      '@types/react': 18.3.18
 
   '@types/react-native-background-timer@2.0.2': {}
 
@@ -11372,10 +11369,6 @@ snapshots:
   '@types/react@18.3.18':
     dependencies:
       '@types/prop-types': 15.7.15
-      csstype: 3.2.3
-
-  '@types/react@19.2.14':
-    dependencies:
       csstype: 3.2.3
 
   '@types/stack-utils@2.0.3': {}

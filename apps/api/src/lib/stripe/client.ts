@@ -1,8 +1,34 @@
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-02-24.acacia",
-  typescript: true,
+const API_VERSION = "2025-02-24.acacia" as const;
+
+function resolveStripeSecretKey(): string {
+  const key = process.env.STRIPE_SECRET_KEY?.trim();
+  if (key) return key;
+  if (process.env.GITHUB_ACTIONS === "true") {
+    return "sk_test_ci000000000000000000000000000000000000000000000000000000";
+  }
+  throw new Error("STRIPE_SECRET_KEY must be set at runtime.");
+}
+
+let stripeSingleton: Stripe | null = null;
+
+function getStripe(): Stripe {
+  if (!stripeSingleton) {
+    stripeSingleton = new Stripe(resolveStripeSecretKey(), {
+      apiVersion: API_VERSION,
+      typescript: true,
+    });
+  }
+  return stripeSingleton;
+}
+
+export const stripe = new Proxy({} as Stripe, {
+  get(_target, prop) {
+    const client = getStripe();
+    const value = Reflect.get(client, prop, client);
+    return typeof value === "function" ? value.bind(client) : value;
+  },
 });
 
 export async function createCheckoutSession(params: {

@@ -1,5 +1,13 @@
 const DAILY_API_URL = "https://api.daily.co/v1";
-const DAILY_API_KEY = process.env.DAILY_API_KEY!;
+
+function resolveDailyApiKey(): string {
+  const key = process.env.DAILY_API_KEY?.trim();
+  if (key) return key;
+  if (process.env.GITHUB_ACTIONS === "true") {
+    return "ci_daily_placeholder";
+  }
+  throw new Error("DAILY_API_KEY must be set at runtime.");
+}
 
 interface DailyRoomResponse {
   id: string;
@@ -20,7 +28,7 @@ async function dailyFetch<T>(
   const response = await fetch(`${DAILY_API_URL}${path}`, {
     ...options,
     headers: {
-      Authorization: `Bearer ${DAILY_API_KEY}`,
+      Authorization: `Bearer ${resolveDailyApiKey()}`,
       "Content-Type": "application/json",
       ...options.headers,
     },

@@ -1,6 +1,30 @@
 import { Resend } from "resend";
 
-export const resend = new Resend(process.env.RESEND_API_KEY!);
+function resolveResendApiKey(): string {
+  const key = process.env.RESEND_API_KEY?.trim();
+  if (key) return key;
+  if (process.env.GITHUB_ACTIONS === "true") {
+    return "re_ci_build_placeholder_00000000000000000000000000";
+  }
+  throw new Error("RESEND_API_KEY must be set at runtime.");
+}
+
+let resendSingleton: Resend | null = null;
+
+function getResend(): Resend {
+  if (!resendSingleton) {
+    resendSingleton = new Resend(resolveResendApiKey());
+  }
+  return resendSingleton;
+}
+
+export const resend = new Proxy({} as Resend, {
+  get(_target, prop) {
+    const client = getResend();
+    const value = Reflect.get(client, prop, client);
+    return typeof value === "function" ? value.bind(client) : value;
+  },
+});
 
 const FROM_EMAIL = "TeleMed <noreply@telemed.app>";
 

@@ -1,9 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { supabaseAdmin } from "@/lib/supabase/client";
-import {
-  bookConsultationSchema,
-  updateConsultationSchema,
-} from "@telemed/shared";
+import { bookConsultationSchema } from "@telemed/shared";
 import { apiResponse, apiError, handleApiError } from "@/lib/api-utils";
 import { createDailyRoom } from "@/lib/daily/client";
 import { sendConsultationConfirmation } from "@/lib/resend/client";

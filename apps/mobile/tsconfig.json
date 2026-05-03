@@ -1,6 +1,7 @@
 {
-  "extends": "@telemed/ts-config/expo.json",
+  "extends": "@telemed/ts-config/expo",
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@telemed/shared": ["../../packages/shared/src"],

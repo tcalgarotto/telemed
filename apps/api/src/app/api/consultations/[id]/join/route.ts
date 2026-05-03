@@ -4,7 +4,7 @@ import { getDailyRoomToken } from "@/lib/daily/client";
 import { apiResponse, apiError, handleApiError } from "@/lib/api-utils";
 
 export async function POST(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {

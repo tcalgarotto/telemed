@@ -1,4 +1,5 @@
 import * as Sentry from "@sentry/nextjs";
+import type { ErrorEvent } from "@sentry/core";
 
 export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
@@ -6,7 +7,7 @@ export async function register() {
       dsn: process.env.SENTRY_DSN,
       tracesSampleRate: 1.0,
       environment: process.env.NODE_ENV ?? "development",
-      beforeSend(event) {
+      beforeSend(event: ErrorEvent) {
         // Filter out sensitive health data
         if (event.request?.data) {
           delete event.request.data;

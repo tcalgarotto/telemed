@@ -1,5 +1,5 @@
 {
-  "extends": "@telemed/ts-config/nextjs.json",
+  "extends": "@telemed/ts-config/nextjs",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

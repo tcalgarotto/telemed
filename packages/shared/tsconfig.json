@@ -1,5 +1,5 @@
 {
-  "extends": "@telemed/ts-config/base.json",
+  "extends": "@telemed/ts-config/base",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src"

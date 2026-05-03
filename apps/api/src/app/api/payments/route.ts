@@ -5,7 +5,7 @@ import {
   createSubscriptionSchema,
 } from "@telemed/shared";
 import { apiResponse, apiError, handleApiError } from "@/lib/api-utils";
-import { stripe, createCheckoutSession } from "@/lib/stripe/client";
+import { createCheckoutSession } from "@/lib/stripe/client";
 
 export async function POST(request: Request) {
   try {

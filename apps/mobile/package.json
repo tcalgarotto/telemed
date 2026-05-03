@@ -16,7 +16,9 @@
   "dependencies": {
     "@clerk/clerk-expo": "^2.8.0",
     "@daily-co/react-native-daily-js": "^0.67.0",
+    "@expo/vector-icons": "^14.0.4",
     "@react-navigation/native": "^7.0.0",
+    "@sentry/react-native": "^8.10.0",
     "@stripe/stripe-react-native": "^0.40.0",
     "@supabase/supabase-js": "^2.48.0",
     "@telemed/shared": "workspace:*",
@@ -50,8 +52,10 @@
     "@babel/core": "^7.26.0",
     "@telemed/eslint-config": "workspace:*",
     "@telemed/ts-config": "workspace:*",
+    "@types/node": "^22.19.17",
     "@types/react": "~18.3.0",
     "eslint": "^8.57.0",
+    "eslint-config-expo": "~8.0.1",
     "typescript": "^5.7.0"
   }
 }
